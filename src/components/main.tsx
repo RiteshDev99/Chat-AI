@@ -1,9 +1,13 @@
 import axios from "axios";
 import { useRef, useState } from "react";
-import { IoSearch } from "react-icons/io5";
 import { MdVerified } from "react-icons/md";
+import { IoSend } from "react-icons/io5";
+import ReactMarkdown from 'react-markdown'
+
+
 
 const Main = () => {
+
     const [questions, setQuestions] = useState("")
     const [answer, setAnswer] = useState("")
     async function generateAnswer(): Promise<void> {
@@ -30,9 +34,14 @@ const Main = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const fetchData = async () => {
         setInput(inputRef.current?.value)
+       
+    
 
     }
 
+
+
+    
 
 
     return (
@@ -44,20 +53,21 @@ const Main = () => {
                     <h1 className="text-gray-200">See the latest updates to the Chat-AI Apps Privacy Hub</h1>
                 </div>
                 <div className="h-[100vh] w-full mt-[2vh]">
-                    <div className="h-[55vh] w-full overflow-hidden">
-                        <div className="text-white flex items-center justify-center p-[8vh] text-lg text-wrap">
-                            {
-                                answer
-                            }
+                    <div className="h-[55vh] w-full">
+                        <div className="text-white p-[8vh] flex justify-center">
+                            <div className="whitespace-pre-wrap overflow-y-scroll scroll scroll-smooth h-[50vh] overflow-hidden ">
+                                <ReactMarkdown>{answer}</ReactMarkdown>
+                            </div>
                         </div>
-
                     </div>
-                    <div className="h-[22vh] w-full  flex justify-end ">
+                    <div className="h-[20vh] w-full  flex justify-end  ">
                         <div className="h-[22vh] w-[40vw]  flex items-center justify-center">
-                            <p className="text-white text-xl font-thin">
+                            <p className="text-white text-xl font-extralight tracking-wide">
                                 {
+                                    
                                     input
                                 }
+
                             </p>
                         </div>
                     </div>
@@ -66,12 +76,12 @@ const Main = () => {
                         <div className="h-[6vh] w-[50vw] bg-zinc-700 rounded-[4vw] flex items-center p-4 ">
                             <input onChange={(e) => setQuestions(e.target.value)} value={questions} type="text" ref={inputRef}
                                 placeholder="Enter a propt here" className="h-[6vh] w-[48vw] rounded-[4vw] p-3 outline-none cursor-pointer bg-zinc-700 text-gray-100" />
-                            <IoSearch
+                            <IoSend 
                                 onClick={() => {
                                     generateAnswer();
                                     fetchData();
                                 }}
-                                className="text-3xl cursor-pointer text-gray-100 hover:text-[#15803d]"
+                                className="text-2xl cursor-pointer text-zinc-300 hover:text-slate-500"
                             />
                             
                         </div>
